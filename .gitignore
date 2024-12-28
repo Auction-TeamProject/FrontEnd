@@ -45,3 +45,6 @@ android/local.properties
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore dev-dist directory
+dev-dist/
