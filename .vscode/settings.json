@@ -2,5 +2,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "always",
     "source.fixAll.eslint": "always"
-  }
+  },
+  "stylelint.validate": [
+    "css",
+    "postcss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
 }
