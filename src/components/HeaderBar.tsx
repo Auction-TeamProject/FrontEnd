@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode, useState } from 'react';
+import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -20,6 +20,29 @@ const HeaderBar = ({
 }: HeaderBarProps) => {
   const navigate = useNavigate();
   const [isDropDown, setIsDropDown] = useState<boolean>(false);
+  const dropDownRef = useRef<HTMLUListElement>(null);
+  const dropDownButtonRef = useRef<HTMLButtonElement>(null);
+
+  // 드롭다운 메뉴 외부클릭시 닫는 이벤트 등록
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropDownRef.current &&
+        event.target instanceof Node &&
+        !dropDownRef.current.contains(event.target) &&
+        event.target !== dropDownButtonRef.current
+      ) {
+        setIsDropDown(false);
+        console.log('click outside');
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <HeaderBarContainer {...props}>
@@ -28,12 +51,17 @@ const HeaderBar = ({
       )}
       <HeaderBarTitle>{children}</HeaderBarTitle>
       {showDropdown && (
-        <DropdownButton onClick={() => setIsDropDown((prev) => !prev)}>
+        <DropdownButton
+          onClick={() => setIsDropDown((prev) => !prev)}
+          ref={dropDownButtonRef}
+        >
           {String(isDropDown)}
         </DropdownButton>
       )}
       {isDropDown && (
-        <DropDown dropDownArray={dropDownArray}>dropdown</DropDown>
+        <DropDown dropDownArray={dropDownArray} ref={dropDownRef}>
+          dropdown
+        </DropDown>
       )}
     </HeaderBarContainer>
   );
