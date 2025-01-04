@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 type DropDownProps = {
@@ -9,18 +9,21 @@ export type dropdownType = {
   callback: () => void;
 };
 
-const DropDown = ({ dropDownArray, ...props }: DropDownProps) => {
-  return (
-    <DropDownContainer {...props}>
-      {dropDownArray?.map((item, index) => (
-        <StyledLi key={index}>
-          <button onClick={item.callback}>{item.name}</button>
-        </StyledLi>
-      ))}
-    </DropDownContainer>
-  );
-};
+const DropDown = forwardRef<HTMLUListElement, DropDownProps>(
+  ({ dropDownArray, ...props }, ref) => {
+    return (
+      <DropDownContainer ref={ref} {...props}>
+        {dropDownArray?.map((item, index) => (
+          <StyledLi key={index}>
+            <button onClick={item.callback}>{item.name}</button>
+          </StyledLi>
+        ))}
+      </DropDownContainer>
+    );
+  }
+);
 
+DropDown.displayName = 'DropDown';
 export default DropDown;
 
 const DropDownContainer = styled.ul`
