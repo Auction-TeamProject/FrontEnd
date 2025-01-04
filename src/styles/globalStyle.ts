@@ -1,6 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  /* css 전역변수 */
+  :root {
+  --primary-text-color: #000; /* 주 텍스트 색상 */
+  --secondary-text-color: #555; /* 보조 텍스트 색상 */
+  --muted-text-color: #888; /* 덜 중요한 텍스트 색상 */
+  --background-color: rgb(238 233 233); /* 배경 색상 */
+  }
+
   /* 기본 스타일 초기화 */
   * {
     padding: 0;
@@ -35,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
       "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color:var(--background-color);
   }
 
   /* a 태그 기본 스타일 제거 */
@@ -48,6 +57,17 @@ const GlobalStyle = createGlobalStyle`
 
   a:focus {
     outline: none;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 425px;
+    height: 100vh;
+    background-color:var(--background-color);
   }
 
   /* button 태그 기본 스타일 제거 */
@@ -66,6 +86,12 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  /* ul 태그 기본 스타일 제거 */
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 `;
 
 export default GlobalStyle;
