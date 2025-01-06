@@ -103,18 +103,22 @@ const EndDate = styled.p`
   align-items: center;
   justify-content: flex-end;
   margin-left: 0;
+  font-size: 0.8rem;
   color: var(--muted-text-color);
 `;
 
 const StickyButtonContainer = styled.div`
   position: sticky;
   bottom: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0 var(--marginless-container-padding);
+  padding: 0 var(--marginless-container-padding)
+    var(--marginless-container-padding);
+  margin-bottom: calc(-1 * var(--marginless-container-padding));
   background-color: white;
 `;
 
