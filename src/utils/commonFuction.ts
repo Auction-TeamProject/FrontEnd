@@ -12,5 +12,5 @@ export const convertMillisecondsToTime = (milliseconds: number) => {
   const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
 
-  return `${days > 0 ? days + '일' : ''} ${hours > 0 ? hours + ':' : ''}${minutes}:${seconds}`;
+  return `${days > 0 ? days + '일' : ''} ${hours > 0 ? hours + ':' : ''}${minutes >= 10 ? minutes : '0' + minutes}:${seconds >= 10 ? seconds : '0' + seconds}`;
 };
