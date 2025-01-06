@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import ItemBids from '../components/itemDetail/ItemBids';
 import ItemDescription from '../components/itemDetail/ItemDescription';
-import { LayoutContextType } from '../components/layout/HeaderBarLayout';
+import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
@@ -25,30 +25,28 @@ type ItemDetailData = {
 const ItemDetailPage = () => {
   const { itemId } = useParams<{ itemId: string }>();
   const [itemDetails, setItemDetails] = useState<ItemDetailData>(null);
-  const { setHeaderTitle, dropDownArray } =
-    useOutletContext<LayoutContextType>();
+  const { setDropDownArray } =
+    useOutletContext<DropDownHeaderLayoutContextType>();
 
-  //헤더 타이틀 설정 테스트
   useEffect(() => {
-    setHeaderTitle('test');
-    return () => {
-      setHeaderTitle('');
-    };
-  }, [setHeaderTitle]);
-
-  // 드롭다운 메뉴 설정 테스트
-  useEffect(() => {
-    dropDownArray.splice(0, dropDownArray.length);
-    dropDownArray.push({
-      name: '테스트3',
-      callback: () => {
-        console.log('테스트3');
+    setDropDownArray([
+      {
+        name: '글 수정',
+        callback: () => {
+          console.log('테스트1');
+        },
       },
-    });
+      {
+        name: '글 삭제',
+        callback: () => {
+          console.log('테스트2');
+        },
+      },
+    ]);
     return () => {
-      dropDownArray.splice(0, dropDownArray.length);
+      setDropDownArray(undefined);
     };
-  }, [dropDownArray]);
+  }, [setDropDownArray]);
 
   useEffect(() => {
     // 가상 api 호출
