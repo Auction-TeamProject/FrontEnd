@@ -2,22 +2,18 @@ import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import DropDown, { dropdownType } from './dropdown';
+import DropDown, { DropdownType } from './DropDown';
 
-type HeaderBarProps = {
+type DropdownHeaderProps = {
   children?: ReactNode;
-  isBackButton: boolean;
-  showDropdown: boolean;
-  dropDownArray?: Array<dropdownType>;
+  dropDownArray?: Array<DropdownType>;
 } & HTMLAttributes<HTMLDivElement>;
 
-const HeaderBar = ({
+const DropDownHeaderBar = ({
   children,
-  isBackButton,
-  showDropdown,
   dropDownArray,
   ...props
-}: HeaderBarProps) => {
+}: DropdownHeaderProps) => {
   const navigate = useNavigate();
   const [isDropDown, setIsDropDown] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLUListElement>(null);
@@ -46,28 +42,30 @@ const HeaderBar = ({
 
   return (
     <HeaderBarContainer {...props}>
-      {isBackButton && (
-        <BackButton onClick={() => navigate(-1)}>back</BackButton>
-      )}
+      <BackButton onClick={() => navigate(-1)}>back</BackButton>
       <HeaderBarTitle>{children}</HeaderBarTitle>
-      {showDropdown && (
-        <DropdownButton
-          onClick={() => setIsDropDown((prev) => !prev)}
-          ref={dropDownButtonRef}
-        >
-          {String(isDropDown)}
-        </DropdownButton>
-      )}
-      {isDropDown && (
-        <DropDown dropDownArray={dropDownArray} ref={dropDownRef}>
-          dropdown
-        </DropDown>
+      {dropDownArray && dropDownArray.length > 1 && (
+        <>
+          {
+            <DropdownButton
+              onClick={() => setIsDropDown((prev) => !prev)}
+              ref={dropDownButtonRef}
+            >
+              {String(isDropDown)}
+            </DropdownButton>
+          }
+          {isDropDown && (
+            <DropDown dropDownArray={dropDownArray} ref={dropDownRef}>
+              dropdown
+            </DropDown>
+          )}
+        </>
       )}
     </HeaderBarContainer>
   );
 };
 
-export default HeaderBar;
+export default DropDownHeaderBar;
 
 const HeaderBarContainer = styled.div`
   position: relative;
