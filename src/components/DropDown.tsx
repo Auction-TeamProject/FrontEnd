@@ -2,9 +2,9 @@ import { forwardRef, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 type DropDownProps = {
-  dropDownArray?: Array<dropdownType>;
+  dropDownArray?: Array<DropdownType>;
 } & HTMLAttributes<HTMLUListElement>;
-export type dropdownType = {
+export type DropdownType = {
   name: string;
   callback: () => void;
 };
