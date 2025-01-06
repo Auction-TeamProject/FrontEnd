@@ -1,21 +1,32 @@
 import { RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
-import HeaderBarLayout from './components/layout/HeaderBarLayout';
+import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout';
 import ItemDetailPage from './pages/ItemDetailPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HeaderBarLayout />,
     children: [
       {
         path: '/',
-        element: null,
+        element: <DropDownHeaderBarLayout headerTitle={'홈'} />,
+        children: [
+          {
+            path: '/',
+            element: null,
+          },
+        ],
       },
       {
-        path: '/item-detail/:itemId',
-        element: <ItemDetailPage />,
+        path: '/item-detail',
+        element: <DropDownHeaderBarLayout />,
+        children: [
+          {
+            path: ':itemId',
+            element: <ItemDetailPage />,
+          },
+        ],
       },
     ],
   },
