@@ -20,9 +20,12 @@ export const MarginLessContainer = styled.section<MarginLessContainerProps>`
 `;
 
 export const MarginLessContainerTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding: 0;
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: 700;
 `;
 
@@ -32,9 +35,9 @@ export const BarButton = styled.button`
   justify-content: center;
   width: 100%;
   height: 3rem;
-  font-size: 20px;
+  font-size: var(--font-size-medium);
   font-weight: bold;
   color: white;
-  background-color: rgb(255 212 0);
+  background-color: var(--primary-color);
   border-radius: 10px;
 `;

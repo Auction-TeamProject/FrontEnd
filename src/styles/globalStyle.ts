@@ -7,6 +7,13 @@ const GlobalStyle = createGlobalStyle`
   --secondary-text-color: #555; /* 보조 텍스트 색상 */
   --muted-text-color: #888; /* 덜 중요한 텍스트 색상 */
   --background-color: rgb(238 233 233); /* 배경 색상 */
+  --font-size-base: 1rem; /* 기본 폰트 크기 */
+  --font-size-small: 0.9rem; /* 작은 폰트 크기 */
+  --font-size-xsmall: 0.8rem; /* 매우 작은 폰트 크기 */
+  --font-size-medium: 1.25rem; /* 중간 폰트 크기 */
+  --font-size-large: 2rem; /* 큰 폰트 크기 */
+  --primary-color: rgb(255 212 0); /* 프로젝트 아이덴티티 컬러 */
+  
   }
 
   /* 기본 스타일 초기화 */
