@@ -1,22 +1,29 @@
 import { HTMLAttributes, useEffect, useState } from 'react';
+import { IoMdPeople } from 'react-icons/io';
 import styled from 'styled-components';
 
-import testImg from '../../assets/react.svg';
 import { BidType } from '../../pages/ItemDetailPage';
 import {
-  BarButton,
   MarginLessContainer,
   MarginLessContainerTitle,
 } from '../../styles/commonStyle';
-import { convertMillisecondsToTime } from '../../utils/commonFuction';
+import ReFreshButton from '../ReFreshButton';
+import BidSheetModal from './BidSheetModal';
 
 type ItemBidsProps = {
   bids: Array<BidType>;
   bidderCount: number;
   endDate: Date;
+  bidIncrement: number;
 } & HTMLAttributes<HTMLDivElement>;
 
-const ItemBids = ({ bids, bidderCount, endDate, ...props }: ItemBidsProps) => {
+const ItemBids = ({
+  bids,
+  bidderCount,
+  endDate,
+  bidIncrement,
+  ...props
+}: ItemBidsProps) => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -29,9 +36,11 @@ const ItemBids = ({ bids, bidderCount, endDate, ...props }: ItemBidsProps) => {
 
   return (
     <MarginLessContainer $flex={1} {...props}>
-      <MarginLessContainerTitle>입찰 내역</MarginLessContainerTitle>
+      <MarginLessContainerTitle>
+        입찰 내역 <ReFreshButton />
+      </MarginLessContainerTitle>
       <BidderCount>
-        <ViewerIcon src={testImg} />
+        <IoMdPeople></IoMdPeople>
         현재 참여자 {bidderCount}명
       </BidderCount>
       <StyledUl>
@@ -46,21 +55,18 @@ const ItemBids = ({ bids, bidderCount, endDate, ...props }: ItemBidsProps) => {
                 minute: '2-digit',
                 hourCycle: 'h23',
               })}
-              -{bid.description}
+              -{bid.price}원-{bid.description}
             </Description>
             <Bidder>{bid.bidder}</Bidder>
           </StyledLi>
         ))}
       </StyledUl>
-      <StickyButtonContainer>
-        <EndDate>
-          ⌛️종료까지 남은시간
-          {convertMillisecondsToTime(
-            Math.abs(endDate.getTime() - currentTime.getTime())
-          )}
-        </EndDate>
-        <BarButton>경매 참여</BarButton>
-      </StickyButtonContainer>
+      <BidSheetModal
+        currentTime={currentTime}
+        endDate={endDate}
+        startPrice={bids.length > 0 ? bids[0].price : 0}
+        bidIncrement={bidIncrement}
+      ></BidSheetModal>
     </MarginLessContainer>
   );
 };
@@ -97,45 +103,14 @@ const Bidder = styled.p`
   white-space: nowrap;
 `;
 
-const EndDate = styled.p`
-  display: flex;
-  gap: var(--item-detail-page-gap);
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: 0;
-  font-size: 0.8rem;
-  color: var(--muted-text-color);
-`;
-
-const StickyButtonContainer = styled.div`
-  position: sticky;
-  bottom: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0 var(--marginless-container-padding)
-    var(--marginless-container-padding);
-  margin-bottom: calc(-1 * var(--marginless-container-padding));
-  background-color: white;
-`;
-
 const BidderCount = styled.p`
   position: absolute;
   top: 0;
   right: 0;
   display: flex;
-  margin: var(--marginless-container-padding);
-  color: var(--muted-text-color);
-`;
-
-const ViewerIcon = styled.img`
-  display: flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
-  margin: 0 var(--item-detail-page-gap);
+  margin: var(--marginless-container-padding);
+  font-size: var(--font-size-small);
+  color: var(--muted-text-color);
 `;
