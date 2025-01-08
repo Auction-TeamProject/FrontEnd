@@ -10,7 +10,12 @@ import {
   MarginLessContainerTitle,
 } from '../styles/commonStyle';
 
-export type BidType = { date: Date; description: string; bidder: string };
+export type BidType = {
+  date: Date;
+  description: string;
+  bidder: string;
+  price: number;
+};
 
 type ItemDetailData = {
   itemName: string;
@@ -20,6 +25,7 @@ type ItemDetailData = {
   viewerCount: number;
   bidderCount: number;
   endDate: Date;
+  bidIncrement: number;
 } | null;
 
 const ItemDetailPage = () => {
@@ -56,29 +62,98 @@ const ItemDetailPage = () => {
       photoUrl: [],
       viewerCount: 0,
       bidderCount: 0,
+      bidIncrement: 1000,
       bids: [
         {
           date: new Date(),
+          price: 2000,
           description: '테스트1231231232312312331',
           bidder: '테스트1123',
         },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
-        { date: new Date(), description: '테스트', bidder: '테스트' },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
+        {
+          price: 1000,
+          date: new Date(),
+          description: '테스트',
+          bidder: '테스트',
+        },
       ],
       endDate: new Date(),
     });
@@ -99,6 +174,7 @@ const ItemDetailPage = () => {
         bids={itemDetails?.bids || []}
         bidderCount={itemDetails?.bidderCount || 0}
         endDate={itemDetails?.endDate || new Date()}
+        bidIncrement={itemDetails?.bidIncrement || 1000}
       />
     </PageContainer>
   );
@@ -122,5 +198,5 @@ const ItemName = styled.p`
   padding: 0;
   margin: 0;
   margin-left: 1rem;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 `;
