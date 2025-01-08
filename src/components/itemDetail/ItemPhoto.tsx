@@ -1,7 +1,7 @@
 import { HTMLAttributes, useEffect, useState } from 'react';
+import { AiOutlineLoading } from 'react-icons/ai';
+import { FaCamera } from 'react-icons/fa';
 import styled, { keyframes } from 'styled-components';
-
-import testImg from '../../assets/react.svg';
 
 type ItemPhotoProps = {
   src?: string;
@@ -30,9 +30,15 @@ const ItemPhoto = ({ src, alt, ...props }: ItemPhotoProps) => {
 
   return (
     <>
-      {!isLoaded || !src ? (
+      {!isLoaded || (src && src.length < 0) ? (
         <EmptyPhoto {...props}>
-          <PhotoIcon src={testImg}></PhotoIcon>
+          {isLoaded ? (
+            <PhotoIcon>
+              <AiOutlineLoading />
+            </PhotoIcon>
+          ) : (
+            <FaCamera />
+          )}
         </EmptyPhoto>
       ) : (
         <Photo {...props} src={src} alt={alt} loading="lazy" />
@@ -64,6 +70,8 @@ const EmptyPhoto = styled.div`
   justify-content: center;
   aspect-ratio: 1 / 1;
   margin: 0;
+  font-size: var(--font-size-large);
+  color: var(--muted-text-color);
   background-color: var(--background-color);
   border: none;
   border-radius: 8px;
@@ -78,7 +86,7 @@ const rotate = keyframes`
   }
 `;
 
-const PhotoIcon = styled.img`
+const PhotoIcon = styled.div`
   display: flex;
   flex: 1;
   align-items: center;

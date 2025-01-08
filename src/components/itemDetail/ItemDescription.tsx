@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
+import { LuEye } from 'react-icons/lu';
 import styled from 'styled-components';
 
-import testImg from '../../assets/react.svg';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
@@ -26,7 +26,7 @@ const ItemDescription = ({
         <MarginLessContainerTitle>상품 설명</MarginLessContainerTitle>
         <TextContainer>{itemDescription}</TextContainer>
         <ViewerContainer>
-          <ViewerIcon src={testImg} /> {viewerCount}명 조회
+          <ViewerIcon /> {viewerCount}명 조회
         </ViewerContainer>
       </MarginContaniner>
       <PhotoContainer>
@@ -81,10 +81,11 @@ const ViewerContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin: var(--item-detail-page-gap) 0;
+  font-size: 0.9rem;
   color: var(--muted-text-color);
 `;
 
-const ViewerIcon = styled.img`
+const ViewerIcon = styled(LuEye)`
   display: flex;
   align-items: center;
   justify-content: center;
