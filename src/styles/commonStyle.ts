@@ -41,3 +41,15 @@ export const BarButton = styled.button`
   background-color: var(--primary-color);
   border-radius: 10px;
 `;
+
+export const StyledInput = styled.input`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+  font-size: var(--font-size-base);
+  background-color: var(--background-color);
+  border-radius: 10px;
+`;

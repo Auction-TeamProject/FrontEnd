@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   /* css 전역변수 */
   :root {
+  --primary-color: rgb(255 212 0); /* 프로젝트 아이덴티티 컬러 */
   --primary-text-color: #000; /* 주 텍스트 색상 */
   --secondary-text-color: #555; /* 보조 텍스트 색상 */
   --muted-text-color: #888; /* 덜 중요한 텍스트 색상 */
@@ -12,8 +13,6 @@ const GlobalStyle = createGlobalStyle`
   --font-size-xsmall: 0.8rem; /* 매우 작은 폰트 크기 */
   --font-size-medium: 1.25rem; /* 중간 폰트 크기 */
   --font-size-large: 2rem; /* 큰 폰트 크기 */
-  --primary-color: rgb(255 212 0); /* 프로젝트 아이덴티티 컬러 */
-  
   }
 
   /* 기본 스타일 초기화 */
@@ -28,6 +27,18 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     user-select: text;
   }
+
+  /* input 기본 스타일제거 */
+  input {
+  padding: 0; /* 패딩 제거 */
+  margin: 0; /* 마진 제거 */
+  font: inherit; /* 부모 요소의 폰트 상속 */
+  color: inherit; /* 부모 요소의 색상 상속 */
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  outline: none; /* 포커스 시 나타나는 외곽선 제거 */
+  box-shadow: none; /* 그림자 제거 */
+}
 
   /* 모든 요소에 box-sizing: border-box 적용 */
   *,
@@ -58,7 +69,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     color: inherit;
-    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
   }
 
