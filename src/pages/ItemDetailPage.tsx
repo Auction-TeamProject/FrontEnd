@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ItemBids from '../components/itemDetail/ItemBids';
 import ItemDescription from '../components/itemDetail/ItemDescription';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
+import { useUserState } from '../context/userStore';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
@@ -20,6 +21,7 @@ export type BidType = {
 type ItemDetailData = {
   itemName: string;
   itemDescription: string;
+  author: string;
   bids: Array<BidType>;
   photoUrl: string[];
   viewerCount: number;
@@ -33,32 +35,36 @@ const ItemDetailPage = () => {
   const [itemDetails, setItemDetails] = useState<ItemDetailData>(null);
   const { setDropDownArray } =
     useOutletContext<DropDownHeaderLayoutContextType>();
+  const { user } = useUserState();
 
   useEffect(() => {
-    setDropDownArray([
-      {
-        name: '글 수정',
-        callback: () => {
-          console.log('테스트1');
+    if (user === itemDetails?.author) {
+      setDropDownArray([
+        {
+          name: '글 수정',
+          callback: () => {
+            console.log('테스트1');
+          },
         },
-      },
-      {
-        name: '글 삭제',
-        callback: () => {
-          console.log('테스트2');
+        {
+          name: '글 삭제',
+          callback: () => {
+            console.log('테스트2');
+          },
         },
-      },
-    ]);
+      ]);
+    }
     return () => {
       setDropDownArray(undefined);
     };
-  }, [setDropDownArray]);
+  }, [itemDetails?.author, setDropDownArray, user]);
 
   useEffect(() => {
     // 가상 api 호출
     setItemDetails({
       itemName: itemId || '상품명',
       itemDescription: '상품 설명',
+      author: '작성자',
       photoUrl: [],
       viewerCount: 0,
       bidderCount: 0,
