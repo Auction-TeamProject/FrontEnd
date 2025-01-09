@@ -1,38 +1,58 @@
-import './styles/App.css';
+import { useEffect } from 'react';
+import { RouterProvider } from 'react-router';
+import { createBrowserRouter } from 'react-router-dom';
 
-import { useState } from 'react';
+import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout';
+import { ToastProvider } from './components/Modal/ToastProvider';
+import { useUserActions } from './context/userStore';
+import ItemDetailPage from './pages/ItemDetailPage';
 
-import viteLogo from '/vite.svg';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    children: [
+      {
+        path: '/',
+        element: <DropDownHeaderBarLayout headerTitle={'홈'} />,
+        children: [
+          {
+            path: '/',
+            element: null,
+          },
+        ],
+      },
+      {
+        path: '/item-detail',
+        element: <DropDownHeaderBarLayout />,
+        children: [
+          {
+            path: ':itemId',
+            element: <ItemDetailPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <div>잘못된 경로입니다</div>,
+  },
+]);
 
-import reactLogo from './assets/react.svg';
-
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const { loadUser, setUser } = useUserActions();
+  useEffect(() => {
+    setUser('작성자'); //원래 로그인시 사용해야하지만 테스트를 위해 사용
+    loadUser();
+  }, [loadUser, setUser]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
     </>
   );
-}
+};
 
 export default App;
