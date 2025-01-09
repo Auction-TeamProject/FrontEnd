@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FaRegHourglass } from 'react-icons/fa';
 import styled from 'styled-components';
 
+import { useToastActions } from '../../context/toastStore';
 import { BarButton } from '../../styles/commonStyle';
 import { convertMillisecondsToTime } from '../../utils/commonFuction';
 
@@ -22,6 +23,7 @@ const BidSheetModal = ({
   const [count, setCount] = useState(0);
   const [showBidSheet, setShowBidSheet] = useState(false);
   const bidContainerRef = useRef<HTMLDivElement>(null);
+  const { addToast } = useToastActions();
 
   const countDecreaseHandler = () => {
     if (count > 0) {
@@ -36,7 +38,15 @@ const BidSheetModal = ({
   };
 
   const barButtonHandler = () => {
-    setShowBidSheet(true);
+    if (!showBidSheet) {
+      setShowBidSheet(true);
+    } else {
+      addToast(
+        `${bidIncrement * count + startPrice}원으로 입찰되었습니다.`,
+        'success'
+      );
+      setShowBidSheet(false);
+    }
   };
 
   const [height, setHeight] = useState('0px');
