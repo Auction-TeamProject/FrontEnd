@@ -1,11 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { AiOutlineLoading } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useToastActions } from '../../../context/toastStore';
-import { useUserActions } from '../../../context/userStore';
-import { BarButton, StyledInput } from '../../../styles/commonStyle';
+import { useToastActions } from '../../context/toastStore';
+import { useUserActions } from '../../context/userStore';
+import {
+  BarButton,
+  FormContainer,
+  StyledInput,
+} from '../../styles/commonStyle';
 
 type LoginFormType = {
   loginId: string;
@@ -81,7 +86,9 @@ const LoginForm = () => {
         <Link to={'/recovery/id'}>아이디 찾기</Link>/
         <Link to={'/recovery/password'}>비밀번호 찾기</Link>
       </RecoveryContainer>
-      <BarButton type="submit">로그인</BarButton>
+      <BarButton type="submit">
+        {loginMutation.isPending ? <AiOutlineLoading /> : '로그인'}
+      </BarButton>
     </FormContainer>
   );
 };
@@ -101,19 +108,15 @@ const fetchLogin = async (loginData: LoginFormType) => {
   );
   if (!response.ok) {
     throw new Error(response.statusText);
+  } else {
+    //헤더에 발급되는 액세스 토큰 저장
+    const token = response.headers.get('Authorization');
+    if (token) {
+      sessionStorage.setItem('accessToken', token);
+    }
   }
   return response.json();
 };
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 10%;
-`;
 
 const RecoveryContainer = styled.div`
   display: flex;
