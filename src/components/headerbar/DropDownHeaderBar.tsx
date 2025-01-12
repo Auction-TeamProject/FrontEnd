@@ -4,7 +4,7 @@ import { IoChevronBack } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import DropDown, { DropdownType } from './DropDown';
+import DropDown, { DropdownType } from '../DropDown';
 
 type DropdownHeaderProps = {
   children?: ReactNode;

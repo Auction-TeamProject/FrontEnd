@@ -49,3 +49,4 @@ yarn-error.log*
 # Ignore dev-dist directory
 dev-dist/
 .env
+.env.development

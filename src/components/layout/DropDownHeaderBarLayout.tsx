@@ -3,25 +3,24 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DropdownType } from '../DropDown';
-import DropDownHeaderBar from '../DropDownHeaderBar';
+import DropDownHeaderBar from '../headerbar/DropDownHeaderBar';
 
 // 드롭다운 메뉴 헤더 레이아웃을 위한 컨텍스트 타입
 export type DropDownHeaderLayoutContextType = {
   setDropDownArray: Dispatch<SetStateAction<Array<DropdownType> | undefined>>;
-};
-
-type DropDownHeaderBarLayoutProps = {
-  headerTitle?: ReactNode;
+  setHeaderTitle: Dispatch<SetStateAction<ReactNode>>;
 };
 
 /**
  * 드롭다운 기능과 이전으로 가기 버튼이 포함된 헤더 레이아웃입니다
  * 드롭다운을 사용하려면 useOutletContext를 사용하여 setDropDownArray를 사용해야 합니다
+ * 추가로 헤더 타이틀을 변경하려면 setHeaderTitle을 사용해야 합니다
  *
  * @example 
-  const { setDropDownArray } = useOutletContext<DropDownHeaderLayoutContextType>();
+  const { setHeaderTitle, setDropDownArray } = useOutletContext<DropDownHeaderLayoutContextType>();
 
   useEffect(() => {
+    setrHeaderTitle(<h1>테스트</h1>);
     setDropDownArray([
       {
         name: '테스트1',
@@ -37,26 +36,27 @@ type DropDownHeaderBarLayoutProps = {
       },
     ]);
     return () => {
-      setDropDownArray(undefined);
+      setDropDownArray([]);
+      setrHeaderTitle(null);
     };
-  }, [setDropDownArray]);
+  }, [setDropDownArraysetHeaderTitle, setHeaderTitle]);
  */
-const DropDownHeaderBarLayout = ({
-  headerTitle,
-}: DropDownHeaderBarLayoutProps) => {
-  const [dropDownArray, setDropDownArray] = useState<Array<DropdownType>>();
+const DropDownHeaderBarLayout = () => {
+  const [dropDownArray, setDropDownArray] = useState<Array<DropdownType>>([]);
+  const [headerTitle, setHeaderTitle] = useState<ReactNode>(null);
 
   return (
     <>
       <Header>
         <DropDownHeaderBar dropDownArray={dropDownArray}>
-          {headerTitle && headerTitle}
+          {headerTitle}
         </DropDownHeaderBar>
       </Header>
       <Main>
         <Outlet
           context={{
             setDropDownArray,
+            setHeaderTitle,
           }}
         />
       </Main>
@@ -71,7 +71,6 @@ const Header = styled.header`
   top: 0;
   z-index: 1;
   width: 100%;
-  height: 100%;
 `;
 
 const Main = styled.main`
