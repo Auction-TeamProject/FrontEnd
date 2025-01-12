@@ -3,33 +3,60 @@ import { RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
 import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout';
+import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
 import ItemDetailPage from './pages/ItemDetailPage';
+import LoginPage from './pages/LoginPage';
+import RecoveryIdPage from './pages/RecoveryIdPage';
+import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
+import RegisterPage from './pages/RegisterPage';
+import SendEmailPage from './pages/SendEmailPage';
 
 const router = createBrowserRouter([
   {
+    path: 'login',
+    element: <LoginPage />,
+  },
+  {
     path: '/',
+    element: <HomeHeaderBarLayout />,
     children: [
       {
-        path: '/',
-        element: <DropDownHeaderBarLayout headerTitle={'홈'} />,
+        path: '',
+        element: <SendEmailPage />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <DropDownHeaderBarLayout />,
+    children: [
+      {
+        path: 'register',
+        element: null,
+        children: [
+          { path: '', element: <RegisterPage /> },
+          { path: 'send-email', element: <SendEmailPage /> },
+        ],
+      },
+      {
+        path: 'recovery',
+        element: null,
         children: [
           {
-            path: '/',
-            element: null,
+            path: 'id',
+            element: <RecoveryIdPage />,
+          },
+          {
+            path: 'password',
+            element: <RecoveryPasswordPage />,
           },
         ],
       },
       {
-        path: '/item-detail',
-        element: <DropDownHeaderBarLayout />,
-        children: [
-          {
-            path: ':itemId',
-            element: <ItemDetailPage />,
-          },
-        ],
+        path: 'item-detail/:itemId',
+        element: <ItemDetailPage />,
       },
     ],
   },
@@ -40,11 +67,10 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const { loadUser, setUser } = useUserActions();
+  const { loadUser } = useUserActions();
   useEffect(() => {
-    setUser('작성자'); //원래 로그인시 사용해야하지만 테스트를 위해 사용
     loadUser();
-  }, [loadUser, setUser]);
+  }, [loadUser]);
 
   return (
     <>
