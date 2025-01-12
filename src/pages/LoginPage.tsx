@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import brandImg from '../assets/react.svg';
-import LoginForm from '../components/itemDetail/login/LoginForm';
+import LoginForm from '../components/login/LoginForm';
 
 const LoginPage = () => {
   return (
@@ -71,6 +71,7 @@ const LoginSection = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 10%;
 `;
 
 const SocialLoginSection = styled.section`
@@ -88,6 +89,7 @@ const SocialLoginSection = styled.section`
 const AppLogo = styled.img`
   width: 100%;
   height: 100px;
+  margin: 3rem 0;
 `;
 
 const RegisterContainer = styled.div`
@@ -96,6 +98,7 @@ const RegisterContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin: 1rem 0;
   font-size: var(--font-size-small);
   color: var(--muted-text-color);
 `;
