@@ -6,6 +6,7 @@ import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout
 import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
+import HomePage from './pages/HomePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import LoginPage from './pages/LoginPage';
 import RecoveryIdPage from './pages/RecoveryIdPage';
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <SendEmailPage />,
+        element: <HomePage />,
       },
     ],
   },
