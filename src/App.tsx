@@ -7,6 +7,7 @@ import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
 import ItemDetailPage from './pages/ItemDetailPage';
+import ItemRegisterPage from './pages/ItemRegisterPage';
 import LoginPage from './pages/LoginPage';
 import RecoveryIdPage from './pages/RecoveryIdPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
@@ -55,8 +56,18 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'item-detail/:itemId',
-        element: <ItemDetailPage />,
+        path: 'auction',
+        element: null,
+        children: [
+          {
+            path: 'register',
+            element: <ItemRegisterPage />,
+          },
+          {
+            path: 'detail/:itemId',
+            element: <ItemDetailPage />,
+          },
+        ],
       },
     ],
   },
