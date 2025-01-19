@@ -54,6 +54,7 @@ const Photo = styled.img`
   flex: 1;
   place-self: center center;
   min-width: 0;
+  max-width: 100%;
   min-height: 0;
   aspect-ratio: 1 / 1;
   margin: 0;
