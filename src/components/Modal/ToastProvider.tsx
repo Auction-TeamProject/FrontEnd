@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { useToast, useToastActions } from '../../context/toastStore';
-import ToastModal from './toastModal';
+import ToastModal from './ToastModal';
 
 type ToastProviderProps = {
   children?: ReactNode;
