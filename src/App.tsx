@@ -4,9 +4,11 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout';
 import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
+import PopupProvider from './components/Modal/PopupProvider';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
 import ItemDetailPage from './pages/ItemDetailPage';
+import ItemEditPage from './pages/ItemEditPage';
 import ItemRegisterPage from './pages/ItemRegisterPage';
 import LoginPage from './pages/LoginPage';
 import RecoveryIdPage from './pages/RecoveryIdPage';
@@ -65,7 +67,17 @@ const router = createBrowserRouter([
           },
           {
             path: 'detail/:itemId',
-            element: <ItemDetailPage />,
+            element: null,
+            children: [
+              {
+                path: '',
+                element: <ItemDetailPage />,
+              },
+              {
+                path: 'edit',
+                element: <ItemEditPage />,
+              },
+            ],
           },
         ],
       },
@@ -85,9 +97,11 @@ const App = () => {
 
   return (
     <>
-      <ToastProvider>
-        <RouterProvider router={router} />
-      </ToastProvider>
+      <PopupProvider>
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
+      </PopupProvider>
     </>
   );
 };
