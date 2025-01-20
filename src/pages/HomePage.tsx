@@ -3,6 +3,7 @@ import { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 import ItemList from '../components/ItemList';
+import SearchBar from '../components/SearchBar';
 
 type Item = {
   id: number;
@@ -28,16 +29,19 @@ enum Order {
 }
 const HomePage = () => {
   const [order] = useState<Order>(Order.ASC);
+  const [SearchInputValue, setSearchInputValue] = useState<string>();
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['items', order],
-    queryFn: ({ pageParam = 1 }) => fetchItem(pageParam, order),
+    queryKey: ['items', SearchInputValue, order],
+    queryFn: ({ pageParam = 1 }) =>
+      fetchItem(pageParam, SearchInputValue, order),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
   return (
     <HomePageContainer>
+      <SearchBar setSearchInputValue={setSearchInputValue}></SearchBar>
       <ItemListContainer>
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
@@ -56,6 +60,7 @@ const HomePage = () => {
           </Fragment>
         ))}
 
+        {/* 테스트 렌더링용 */}
         {[...Array(12)].map((_item, itemIndex) => (
           <ItemList
             key={itemIndex}
@@ -64,7 +69,7 @@ const HomePage = () => {
             imageUrl=""
             itemDescription={'설명 테스트 123123asdasdfasdfasdf123'}
             itemId={123}
-            itemName={itemIndex}
+            itemName={itemIndex.toString()}
             viewCount={10}
           />
         ))}
@@ -77,6 +82,7 @@ export default HomePage;
 
 const fetchItem = async (
   pageParam: number = 1,
+  query: string | undefined,
   order: string
 ): Promise<PaginatedResponse<Item>> => {
   const response = await fetch(
@@ -84,7 +90,8 @@ const fetchItem = async (
       '/members?page=' +
       pageParam +
       '&order=' +
-      order,
+      order +
+      (query ? '&query=' + query : ''),
     {
       method: 'GET',
       headers: {
@@ -115,4 +122,5 @@ const ItemListContainer = styled.section`
   gap: 1rem;
   justify-content: flex-start;
   width: 100%;
+  margin-top: 1rem;
 `;
