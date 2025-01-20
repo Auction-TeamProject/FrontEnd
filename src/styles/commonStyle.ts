@@ -121,3 +121,19 @@ export const InputContainer = styled.div`
 export const FlexibleBarButton = styled(BarButton)`
   flex: 1;
 `;
+
+export const DesciptionContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  list-style: circle;
+  list-style-position: inside;
+  background-color: var(--background-color);
+  border-radius: 10px;
+
+  li {
+    margin: 0.5rem;
+    font-size: var(--font-size-small);
+    color: var(--muted-text-color);
+  }
+`;
