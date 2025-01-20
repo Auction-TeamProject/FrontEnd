@@ -31,7 +31,9 @@ const RegisterPage = () => {
     mutationFn: fetchRegister,
     onSuccess: () => {
       addToast('회원가입 성공', 'success');
-      navigate('/register/email-send');
+      navigate('/register/email-send', {
+        state: { email: emailRef.current?.data },
+      });
     },
   });
 
