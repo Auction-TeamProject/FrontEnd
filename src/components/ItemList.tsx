@@ -32,7 +32,7 @@ const ItemList = ({
   return (
     <ItemListContainer
       {...props}
-      onClick={() => navigate('/item-detail/' + { itemId })}
+      onClick={() => navigate('/auction/detail/' + { itemId })}
     >
       <ItemPhoto alt="" src={imageUrl}></ItemPhoto>
       <ItemDescriptionContainer>
