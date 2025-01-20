@@ -15,11 +15,11 @@ import {
 import { handleImageFileChange } from '../utils/commonFuction';
 
 type ItemRegisterFormType = {
-  itemName: string;
-  itemDescription: string;
+  productName: string;
+  productDetail: string;
   startPrice: number;
-  bidIncrement: number;
-  endTime: string;
+  bidStep: number;
+  auctionEndDate: string;
   mainImage: File[];
   subImage: File[];
 };
@@ -40,40 +40,28 @@ const ItemRegisterPage = () => {
     register,
     handleSubmit,
     setValue,
-    setError,
     formState: { errors },
-  } = useForm<ItemRegisterFormType>({ mode: 'all' });
+  } = useForm<ItemRegisterFormType>({ mode: 'onSubmit' });
 
   const [mainImage, setMainImage] = useState<File[] | null>(null);
   const mainImageRef = useRef<HTMLInputElement>(null);
   const [subImage, setSubImage] = useState<File[] | null>(null);
   const subImageRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (mainImage) setValue('mainImage', mainImage);
-    if (subImage) setValue('subImage', subImage);
-  }, [mainImage, setValue, subImage]);
 
   // 상품 등록 버튼 클릭 시 실행되는 함수
   const onSubmit = (data: ItemRegisterFormType) => {
-    console.log(data);
-
-    if (!data.mainImage || data.mainImage.length === 0) {
-      console.log('mainImage', data.mainImage);
-      setError('mainImage', {
-        type: 'required',
-        message: '대표 이미지는 필수로 등록해주세요',
-      });
-      return;
-    }
-
     const formData = new FormData();
     // 텍스트 데이터 추가
-    formData.append('itemName', data.itemName);
-    formData.append('itemDescription', data.itemDescription);
+    formData.append('productName', data.productName);
+    formData.append('productDetail', data.productDetail);
     formData.append('startPrice', data.startPrice.toString());
-    formData.append('bidIncrement', data.bidIncrement.toString());
-    formData.append('endTime', data.endTime);
+    formData.append('bidStep', data.bidStep.toString());
+    formData.append('auctionEndDate', data.auctionEndDate);
 
+    if (!mainImage) {
+      addToast('대표 이미지를 등록해주세요', 'warning');
+      return;
+    }
     // 파일 데이터 추가
     formData.append('mainImage', data.mainImage[0]);
     if (data.subImage)
@@ -82,6 +70,7 @@ const ItemRegisterPage = () => {
       });
   };
 
+  //유효성 검사 실패 시 토스트 메시지 출력
   const onSubmitError = () => {
     Object.values(errors).forEach((error) => {
       if (error?.message) {
@@ -90,24 +79,30 @@ const ItemRegisterPage = () => {
     });
   };
 
+  // 이미지 파일이 변경될 때마다 상태 업데이트
+  useEffect(() => {
+    if (mainImage) setValue('mainImage', mainImage);
+    if (subImage) setValue('subImage', subImage);
+  }, [mainImage, setValue, subImage]);
+
   return (
     <PageContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit, onSubmitError)}>
-        <StyledLabel htmlFor="itemName">
+        <StyledLabel htmlFor="productName">
           상품이름
           <StyledInput
-            id="itemName"
-            {...register('itemName', {
+            id="productName"
+            {...register('productName', {
               required: { value: true, message: '상품이름을 입력해주세요' },
             })}
           ></StyledInput>
         </StyledLabel>
 
-        <StyledLabel htmlFor="itemDescription">
+        <StyledLabel htmlFor="productDetail">
           상품설명
           <StyledInput
-            id="itemDescription"
-            {...register('itemDescription', {
+            id="productDetail"
+            {...register('productDetail', {
               required: { value: true, message: '상품설명을 입력해주세요' },
             })}
           ></StyledInput>
@@ -125,13 +120,13 @@ const ItemRegisterPage = () => {
           ></StyledInput>
         </StyledLabel>
 
-        <StyledLabel htmlFor="bidIncrement">
+        <StyledLabel htmlFor="bidStep">
           입찰 가격 조정 단위
           <StyledInput
             placeholder="경매 참여시 조정될 가격을 입력해주세요"
             type="number"
-            id="bidIncrement"
-            {...register('bidIncrement', {
+            id="bidStep"
+            {...register('bidStep', {
               required: {
                 value: true,
                 message: '경매 참여시 조정될 가격을 입력해주세요',
@@ -140,12 +135,12 @@ const ItemRegisterPage = () => {
           ></StyledInput>
         </StyledLabel>
 
-        <StyledLabel htmlFor="endTime">
+        <StyledLabel htmlFor="auctionEndDate">
           경매 종료 시간
           <StyledInput
-            id="endTime"
+            id="auctionEndDate"
             type="datetime-local"
-            {...register('endTime', {
+            {...register('auctionEndDate', {
               required: {
                 value: true,
                 message: '경매 종료 시간을 입력해주세요',
@@ -224,13 +219,31 @@ const ItemRegisterPage = () => {
             )}
           </PhotoInputButton>
         </StyledLabel>
-        <BarButton type="submit">등록</BarButton>
+        <BarButton type="submit">등록 완료</BarButton>
       </FormContainer>
     </PageContainer>
   );
 };
 
 export default ItemRegisterPage;
+
+export const fetchRegisterItem = async (formData: FormData) => {
+  const token = sessionStorage.getItem('accessToken');
+  const response = await fetch(
+    import.meta.env.VITE_BACKEND_API_URL + '/login',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }
+  );
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+};
 
 const PageContainer = styled.div`
   position: relative;
