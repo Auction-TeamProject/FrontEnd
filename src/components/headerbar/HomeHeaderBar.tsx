@@ -1,6 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import { IoPersonOutline } from 'react-icons/io5';
 import { IoNotificationsOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DropdownType } from '../DropDown';
@@ -15,9 +16,9 @@ const HomeHeaderBar = ({ children, ...props }: DropdownHeaderProps) => {
     <HeaderBarContainer {...props}>
       <HeaderBarTitle>{children}</HeaderBarTitle>
       <ButtonContainer>
-        <button>
+        <Link to="/mypage">
           <IoPersonOutline />
-        </button>
+        </Link>
         <button>
           <IoNotificationsOutline />
         </button>
@@ -32,7 +33,7 @@ const HeaderBarContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   height: 3.75rem;
   padding: var(--headerbar-gap);
@@ -41,7 +42,9 @@ const HeaderBarContainer = styled.div`
 
   --headerbar-gap: 1rem;
 `;
+
 const HeaderBarTitle = styled.h1`
+  margin: 0 auto 0 0;
   font-size: var(--font-size-medium);
   font-weight: bold;
 `;
