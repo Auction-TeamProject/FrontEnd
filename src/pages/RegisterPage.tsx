@@ -187,12 +187,6 @@ const fetchRegister = async (data: { [key: string]: string }) => {
   );
   if (!response.ok) {
     throw new Error(response.statusText);
-  } else {
-    //헤더에 발급되는 액세스 토큰 저장
-    const token = response.headers.get('Authorization');
-    if (token) {
-      sessionStorage.setItem('accessToken', token);
-    }
   }
   return response.json();
 };
