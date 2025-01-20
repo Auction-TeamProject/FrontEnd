@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -40,11 +41,21 @@ const FilterDropDown = ({ children, dropDownArray }: FilterDropDownProps) => {
       >
         {children}
       </DropdownButton>
-      {isDropDown && (
-        <DropDown dropDownArray={dropDownArray} ref={dropDownRef}>
-          dropdown
-        </DropDown>
-      )}
+      <AnimatePresence>
+        {isDropDown && (
+          <AbsoluteContainer
+            as={motion.div}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <RelativeDropDown dropDownArray={dropDownArray} ref={dropDownRef}>
+              dropdown
+            </RelativeDropDown>
+          </AbsoluteContainer>
+        )}
+      </AnimatePresence>
     </>
   );
 };
@@ -56,8 +67,23 @@ const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin: 0.5rem;
+  font-size: var(--font-size-small);
+  color: var(--secondary-text-color);
 
   svg {
     margin: 0;
   }
+`;
+
+const AbsoluteContainer = styled.div`
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+`;
+const RelativeDropDown = styled(DropDown)`
+  top: auto;
+  right: 0;
 `;
