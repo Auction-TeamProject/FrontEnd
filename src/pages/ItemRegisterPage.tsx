@@ -11,6 +11,7 @@ import {
   FormContainer,
   StyledInput,
   StyledLabel,
+  StyledTextArea,
 } from '../styles/commonStyle';
 import { handleImageFileChange } from '../utils/commonFuction';
 
@@ -100,12 +101,12 @@ const ItemRegisterPage = () => {
 
         <StyledLabel htmlFor="productDetail">
           상품설명
-          <StyledInput
+          <StyledTextArea
             id="productDetail"
             {...register('productDetail', {
               required: { value: true, message: '상품설명을 입력해주세요' },
             })}
-          ></StyledInput>
+          ></StyledTextArea>
         </StyledLabel>
 
         <StyledLabel htmlFor="startPrice">
