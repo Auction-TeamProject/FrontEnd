@@ -62,6 +62,24 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: 'mypage',
+        element: null,
+        children: [
+          {
+            path: '',
+            element: <Mypage />,
+          },
+          {
+            path: 'edit',
+            element: <ProfileEditPage />,
+          },
+          {
+            path: 'delete',
+            element: <AccountDeletePage />,
+          },
+        ],
+      },
+      {
         path: 'auction',
         element: null,
         children: [
