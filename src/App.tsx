@@ -4,9 +4,12 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import DropDownHeaderBarLayout from './components/layout/DropDownHeaderBarLayout';
 import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
+import PopupProvider from './components/Modal/PopupProvider';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
 import ItemDetailPage from './pages/ItemDetailPage';
+import ItemEditPage from './pages/ItemEditPage';
+import ItemRegisterPage from './pages/ItemRegisterPage';
 import LoginPage from './pages/LoginPage';
 import RecoveryIdPage from './pages/RecoveryIdPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
@@ -55,8 +58,28 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'item-detail/:itemId',
-        element: <ItemDetailPage />,
+        path: 'auction',
+        element: null,
+        children: [
+          {
+            path: 'register',
+            element: <ItemRegisterPage />,
+          },
+          {
+            path: 'detail/:itemId',
+            element: null,
+            children: [
+              {
+                path: '',
+                element: <ItemDetailPage />,
+              },
+              {
+                path: 'edit',
+                element: <ItemEditPage />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -74,9 +97,11 @@ const App = () => {
 
   return (
     <>
-      <ToastProvider>
-        <RouterProvider router={router} />
-      </ToastProvider>
+      <PopupProvider>
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
+      </PopupProvider>
     </>
   );
 };

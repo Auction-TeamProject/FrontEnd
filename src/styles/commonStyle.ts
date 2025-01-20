@@ -54,6 +54,20 @@ export const StyledInput = styled.input`
   border-radius: 10px;
 `;
 
+export const StyledTextArea = styled.textarea`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 7rem;
+  padding: 0.5rem;
+  font-size: var(--font-size-base);
+  resize: none;
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 10px;
+`;
+
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
