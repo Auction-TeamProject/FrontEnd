@@ -32,7 +32,11 @@ export const handleImageFileChange = (
     const fileArray = Array.from(files).filter((file) =>
       file.type.startsWith('image/')
     );
-    setImageState(fileArray);
+    if (fileArray.length > 0) {
+      setImageState(fileArray);
+    } else {
+      alert('이미지 파일을 선택해주세요.');
+    }
   } else {
     alert('이미지 파일을 선택해주세요.');
   }
