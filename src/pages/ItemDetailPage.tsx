@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ItemBids from '../components/itemDetail/ItemBids';
 import ItemDescription from '../components/itemDetail/ItemDescription';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
+import { usePopupActon } from '../context/popupStore';
 import { useUserState } from '../context/userStore';
 import {
   MarginLessContainer,
@@ -36,20 +37,31 @@ const ItemDetailPage = () => {
   const { setDropDownArray } =
     useOutletContext<DropDownHeaderLayoutContextType>();
   const { user } = useUserState();
+  const navigate = useNavigate();
+  const { openPopup } = usePopupActon();
 
   useEffect(() => {
-    if (user === itemDetails?.author) {
+    //if (user === itemDetails?.author) {
+    if (true) {
       setDropDownArray([
         {
           name: '글 수정',
           callback: () => {
-            console.log('테스트1');
+            navigate(`edit`);
           },
         },
         {
           name: '글 삭제',
           callback: () => {
-            console.log('테스트2');
+            openPopup(
+              <DeleteModalDescription>
+                <h3>정말 삭제할까요?</h3>
+                <p>입찰이 시작된 이후 삭제할 수 없어요</p>
+              </DeleteModalDescription>,
+              () => {
+                console.log('삭제 뮤테이트 함수 호출');
+              }
+            );
           },
         },
       ]);
@@ -57,7 +69,7 @@ const ItemDetailPage = () => {
     return () => {
       setDropDownArray(undefined);
     };
-  }, [itemDetails?.author, setDropDownArray, user]);
+  }, [navigate, openPopup, setDropDownArray]);
 
   useEffect(() => {
     // 가상 api 호출
@@ -205,4 +217,9 @@ const ItemName = styled.p`
   margin: 0;
   margin-left: 1rem;
   font-size: var(--font-size-base);
+`;
+
+const DeleteModalDescription = styled.section`
+  display: flex;
+  flex-direction: column;
 `;
