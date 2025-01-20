@@ -1,7 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Fragment, useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import styled from 'styled-components';
 
+import { DropdownType } from '../components/DropDown';
+import FilterDropDown from '../components/FilterDropDown';
 import ItemList from '../components/ItemList';
 import SearchBar from '../components/SearchBar';
 
@@ -23,25 +26,66 @@ type PaginatedResponse<T> = {
   nextCursor: number | null;
 };
 
+//드롭다운 키 역할 enum객체
 enum Order {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  BIDDER_COUNT,
+  END_DATE,
+  VIEW_COUNT,
+  REGISTERED_DATE,
 }
+//드롭다운 출력용
+const orderNameArray: { [key in Order]: string } = {
+  [Order.BIDDER_COUNT]: '높은 참여자 순',
+  [Order.END_DATE]: '빠른 마감일 순',
+  [Order.VIEW_COUNT]: '높은 조회수 순',
+  [Order.REGISTERED_DATE]: '최근 등록일 순',
+};
+//쿼리스트링 포함용
+const orderQueryArray: { [key in Order]: string } = {
+  [Order.BIDDER_COUNT]: 'bidder-count',
+  [Order.END_DATE]: 'end-date',
+  [Order.VIEW_COUNT]: 'view-count',
+  [Order.REGISTERED_DATE]: 'created-date',
+};
+
 const HomePage = () => {
-  const [order] = useState<Order>(Order.ASC);
+  const [order, setOrder] = useState<Order>(Order.REGISTERED_DATE);
   const [SearchInputValue, setSearchInputValue] = useState<string>();
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['items', SearchInputValue, order],
     queryFn: ({ pageParam = 1 }) =>
-      fetchItem(pageParam, SearchInputValue, order),
+      fetchItem(pageParam, SearchInputValue, orderQueryArray[order]),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
+  const dropDownArray: DropdownType[] = [
+    {
+      callback: () => setOrder(Order.REGISTERED_DATE),
+      name: orderNameArray[Order.REGISTERED_DATE],
+    },
+    {
+      callback: () => setOrder(Order.BIDDER_COUNT),
+      name: orderNameArray[Order.BIDDER_COUNT],
+    },
+    {
+      callback: () => setOrder(Order.VIEW_COUNT),
+      name: orderNameArray[Order.VIEW_COUNT],
+    },
+    {
+      callback: () => setOrder(Order.END_DATE),
+      name: orderNameArray[Order.END_DATE],
+    },
+  ];
+
   return (
     <HomePageContainer>
       <SearchBar setSearchInputValue={setSearchInputValue}></SearchBar>
+      <FilterDropDown dropDownArray={dropDownArray}>
+        {orderNameArray[order]}
+        <IoIosArrowDown />
+      </FilterDropDown>
       <ItemListContainer>
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
