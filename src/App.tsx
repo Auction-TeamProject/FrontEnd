@@ -7,6 +7,7 @@ import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
 import PopupProvider from './components/Modal/PopupProvider';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
+import HomePage from './pages/HomePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemEditPage from './pages/ItemEditPage';
 import ItemRegisterPage from './pages/ItemRegisterPage';
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <SendEmailPage />,
+        element: <HomePage />,
       },
     ],
   },
