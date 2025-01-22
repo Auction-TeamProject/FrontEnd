@@ -35,6 +35,7 @@ export const BarButton = styled.button`
   justify-content: center;
   width: 100%;
   height: 3rem;
+  padding: 1rem;
   font-size: var(--font-size-medium);
   font-weight: bold;
   color: white;
