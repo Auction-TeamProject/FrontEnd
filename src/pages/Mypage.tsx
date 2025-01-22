@@ -3,6 +3,7 @@ import { Link, useOutletContext } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
+import MyPageItemList from '../components/MyPageItemList';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
@@ -22,16 +23,28 @@ const Mypage = () => {
   return (
     <PageContainer>
       <MarginLessContainer>
-        <MarginLessContainerTitle>내가 참여중인 상품</MarginLessContainerTitle>
+        <MarginLessContainerTitle>내가 입찰중인 상품</MarginLessContainerTitle>
+        <ItemListContainer>
+          <MyPageItemList />
+        </ItemListContainer>
       </MarginLessContainer>
 
       <MarginLessContainer>
         <MarginLessContainerTitle>내가 등록한 상품</MarginLessContainerTitle>
+        <ItemListContainer>
+          <MyPageItemList />
+        </ItemListContainer>
+      </MarginLessContainer>
+
+      <MarginLessContainer>
+        <MarginLessContainerTitle>프로필 수정</MarginLessContainerTitle>
+        <StyledLink to={'./edit/nickname'}>닉네임 수정하기</StyledLink>
+        <StyledLink to={'./edit/password'}>비밀번호 수정하기</StyledLink>
       </MarginLessContainer>
 
       <MarginLessContainer>
         <MarginLessContainerTitle>계정 관리</MarginLessContainerTitle>
-        <StyledLink to={'./edit'}>내 정보 수정하기</StyledLink>
+        <StyledButton>로그아웃</StyledButton>
         <StyledLink to={'./delete'}>탈퇴하기</StyledLink>
       </MarginLessContainer>
     </PageContainer>
@@ -56,4 +69,22 @@ const StyledLink = styled(Link)`
   display: block;
   margin-top: var(--item-detail-page-gap);
   text-decoration: none;
+`;
+
+const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  margin-top: var(--item-detail-page-gap);
+`;
+
+const ItemListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  margin-top: var(--item-detail-page-gap);
 `;
