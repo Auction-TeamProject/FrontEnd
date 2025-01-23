@@ -60,7 +60,7 @@ export const StyledTextArea = styled.textarea`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 7rem;
+  height: 100%;
   padding: 0.5rem;
   font-size: var(--font-size-base);
   resize: none;
@@ -76,6 +76,7 @@ export const FormContainer = styled.form`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100%;
 `;
 
 export const ErrorDescription = styled.p`
@@ -137,4 +138,17 @@ export const DesciptionContainer = styled.ul`
     font-size: var(--font-size-small);
     color: var(--muted-text-color);
   }
+`;
+
+export const PaddinglessPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--paddingless-page-container-gap);
+  width: 100%;
+  height: 100%;
+  padding: 5% 10%;
+  background-color: white;
+
+  --paddingless-page-container-gap: 8px;
 `;
