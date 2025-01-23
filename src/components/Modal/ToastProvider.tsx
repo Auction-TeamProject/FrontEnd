@@ -36,8 +36,9 @@ export const ToastProvider = ({ children }: ToastProviderProps) => {
 };
 
 const ToastBackground = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
