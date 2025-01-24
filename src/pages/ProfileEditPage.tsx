@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { AiOutlineLoading } from 'react-icons/ai';
 import { useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
 import CheckForm, { CheckFormRef } from '../components/auth/CheckForm';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
@@ -10,6 +9,7 @@ import {
   FlexibleBarButton,
   InputContainer,
   InputSection,
+  PaddingPageContainer,
   StyledLabel,
 } from '../styles/commonStyle';
 
@@ -27,7 +27,7 @@ const ProfileEditPage = () => {
   }, [setHeaderTitle]);
 
   return (
-    <ProfileEditPageContainer>
+    <PaddingPageContainer>
       <InputSection>
         <StyledLabel htmlFor="nickname">
           닉네임
@@ -73,18 +73,8 @@ const ProfileEditPage = () => {
 
         <BarButton type="submit">수정 완료</BarButton>
       </InputSection>
-    </ProfileEditPageContainer>
+    </PaddingPageContainer>
   );
 };
 
 export default ProfileEditPage;
-
-const ProfileEditPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-`;

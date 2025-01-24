@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import { useToastActions } from '../context/toastStore';
 import {
   BarButton,
   FormContainer,
+  PaddingPageContainer,
   StyledInput,
   StyledLabel,
 } from '../styles/commonStyle';
@@ -46,7 +46,7 @@ const RecoveryIdPage = () => {
   };
 
   return (
-    <RecoveryIdPageContainer>
+    <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onsubmit, onSubmitError)}>
         <StyledLabel htmlFor="email">
           이메일
@@ -61,19 +61,8 @@ const RecoveryIdPage = () => {
 
         <BarButton type="submit">완료</BarButton>
       </FormContainer>
-    </RecoveryIdPageContainer>
+    </PaddingPageContainer>
   );
 };
 
 export default RecoveryIdPage;
-
-const RecoveryIdPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  padding: 10%;
-  background-color: white;
-`;

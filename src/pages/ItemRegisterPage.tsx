@@ -15,7 +15,7 @@ import { useToastActions } from '../context/toastStore';
 import {
   BarButton,
   FormContainer,
-  PaddinglessPageContainer,
+  PaddingPageContainer,
 } from '../styles/commonStyle';
 
 export type ItemRegisterFormType = {
@@ -82,7 +82,7 @@ const ItemRegisterPage = () => {
   };
 
   return (
-    <PaddinglessPageContainer>
+    <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit, onSubmitError)}>
         <ProductNameInput register={register} fieldName="productName" />
         <ProductDetailInput register={register} fieldName="productDetail" />
@@ -103,7 +103,7 @@ const ItemRegisterPage = () => {
 
         <BarButton type="submit">등록 완료</BarButton>
       </FormContainer>
-    </PaddinglessPageContainer>
+    </PaddingPageContainer>
   );
 };
 

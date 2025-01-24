@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import { useToastActions } from '../context/toastStore';
 import {
   BarButton,
   FormContainer,
+  PaddingPageContainer,
   StyledInput,
   StyledLabel,
 } from '../styles/commonStyle';
@@ -47,7 +47,7 @@ const RecoveryPasswordPage = () => {
   };
 
   return (
-    <RecoveryPasswordPageContainer>
+    <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onsubmit, onSubmitError)}>
         <StyledLabel htmlFor="loginId">
           아이디
@@ -73,19 +73,8 @@ const RecoveryPasswordPage = () => {
 
         <BarButton type="submit">완료</BarButton>
       </FormContainer>
-    </RecoveryPasswordPageContainer>
+    </PaddingPageContainer>
   );
 };
 
 export default RecoveryPasswordPage;
-
-const RecoveryPasswordPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  padding: 10%;
-  background-color: white;
-`;

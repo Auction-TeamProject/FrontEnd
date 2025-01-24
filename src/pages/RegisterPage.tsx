@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLoading } from 'react-icons/ai';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
 import CheckForm, { CheckFormRef } from '../components/auth/CheckForm';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
@@ -14,6 +13,7 @@ import {
   FlexibleBarButton,
   InputContainer,
   InputSection,
+  PaddingPageContainer,
   StyledInput,
   StyledLabel,
 } from '../styles/commonStyle';
@@ -82,7 +82,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <RegisterPageContainer>
+    <PaddingPageContainer>
       <InputSection>
         <StyledLabel htmlFor="id">
           아이디
@@ -168,7 +168,7 @@ const RegisterPage = () => {
           )}
         </BarButton>
       </InputSection>
-    </RegisterPageContainer>
+    </PaddingPageContainer>
   );
 };
 
@@ -190,13 +190,3 @@ const fetchRegister = async (data: { [key: string]: string }) => {
   }
   return response.json();
 };
-
-const RegisterPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-`;

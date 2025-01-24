@@ -7,6 +7,7 @@ import MyPageItemList from '../components/MyPageItemList';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
+  PaddingLessPageContainer,
 } from '../styles/commonStyle';
 
 const Mypage = () => {
@@ -21,7 +22,7 @@ const Mypage = () => {
   }, [setHeaderTitle]);
 
   return (
-    <PageContainer>
+    <PaddingLessPageContainer>
       <MarginLessContainer>
         <MarginLessContainerTitle>내가 입찰중인 상품</MarginLessContainerTitle>
         <ItemListContainer>
@@ -47,27 +48,15 @@ const Mypage = () => {
         <StyledButton>로그아웃</StyledButton>
         <StyledLink to={'./delete'}>탈퇴하기</StyledLink>
       </MarginLessContainer>
-    </PageContainer>
+    </PaddingLessPageContainer>
   );
 };
 
 export default Mypage;
 
-const PageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--item-detail-page-gap);
-  width: 100%;
-  height: 100%;
-  margin-top: var(--item-detail-page-gap);
-
-  --item-detail-page-gap: 8px;
-`;
-
 const StyledLink = styled(Link)`
   display: block;
-  margin-top: var(--item-detail-page-gap);
+  margin-top: var(--paddingless-page-container-gap);
   text-decoration: none;
 `;
 
@@ -76,15 +65,10 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: flex-start;
   margin: 0;
-  margin-top: var(--item-detail-page-gap);
+  margin-top: var(--paddingless-page-container-gap);
 `;
 
 const ItemListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  justify-content: flex-start;
   margin: 0;
-  margin-top: var(--item-detail-page-gap);
+  margin-top: var(--paddingless-page-container-gap);
 `;
