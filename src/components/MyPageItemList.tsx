@@ -2,11 +2,11 @@ import { useId, useState } from 'react';
 import { MdCheckBoxOutlineBlank, MdOutlineCheckBox } from 'react-icons/md';
 import styled from 'styled-components';
 
+import ExpandableItem from './ExpandableItem';
 import ItemList from './ItemList';
 
 const MyPageItemList = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
   const uniqueId = useId();
 
   return (
@@ -24,7 +24,7 @@ const MyPageItemList = () => {
         </StyledInputLabel>
       </CheckboxContanier>
 
-      <OverflowContainer $isExpanded={isExpanded}>
+      <ExpandableItem>
         {[...Array(4)].map((_item, itemIndex) => (
           <ItemList
             key={itemIndex}
@@ -37,10 +37,7 @@ const MyPageItemList = () => {
             viewCount={10}
           />
         ))}
-      </OverflowContainer>
-      <button onClick={() => setIsExpanded((prev) => !prev)}>
-        {isExpanded ? '접기' : '더보기'}
-      </button>
+      </ExpandableItem>
     </>
   );
 };
@@ -67,27 +64,4 @@ const StyledInputLabel = styled.label`
   font-size: var(--font-size-small);
   color: var(--muted-text-color);
   cursor: pointer;
-`;
-
-const OverflowContainer = styled.div<{ $isExpanded: boolean }>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  ${({ $isExpanded }) =>
-    $isExpanded ? 'max-height: 100%;' : 'max-height: 200px;'}
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-
-  &::before {
-    position: absolute;
-    inset: 0;
-    z-index: 1; /* 가상 요소가 내용물 뒤에 오도록 설정 */
-    pointer-events: none;
-    content: '';
-    box-shadow: inset 0 ${({ $isExpanded }) => ($isExpanded ? '0' : '-60px')}
-      20px -20px white;
-    transition: box-shadow 0.3s ease-in-out;
-  }
 `;
