@@ -89,6 +89,10 @@ const LoginForm = () => {
       <BarButton type="submit">
         {loginMutation.isPending ? <AiOutlineLoading /> : '로그인'}
       </BarButton>
+
+      <RegisterContainer>
+        아직 회원이 아니신가요?<Link to="/register">회원가입</Link>
+      </RegisterContainer>
     </FormContainer>
   );
 };
@@ -125,6 +129,17 @@ const RecoveryContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
   margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--muted-text-color);
+`;
+
+const RegisterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
   font-size: var(--font-size-small);
   color: var(--muted-text-color);
 `;
