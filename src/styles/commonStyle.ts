@@ -11,6 +11,7 @@ export const MarginLessContainer = styled.section<MarginLessContainerProps>`
   flex: ${({ $flex }) => $flex || 0};
   flex-direction: ${({ $direction }) => $direction || 'column'};
   width: 100%;
+  height: 100%;
   padding: var(--marginless-container-padding);
   margin: 0;
   background-color: white;
@@ -70,13 +71,13 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const FormContainer = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
 `;
 
 export const ErrorDescription = styled.p`
@@ -99,7 +100,6 @@ export const InputSection = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10%;
 `;
 
 export const StyledLabel = styled.label`
@@ -140,15 +140,26 @@ export const DesciptionContainer = styled.ul`
   }
 `;
 
-export const PaddinglessPageContainer = styled.div`
+export const PaddingPageContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--paddingless-page-container-gap);
+  gap: var(--padding-page-container-gap);
   width: 100%;
   height: 100%;
   padding: 5% 10%;
   background-color: white;
 
-  --paddingless-page-container-gap: 8px;
+  --padding-page-container-gap: 0.5rem;
+`;
+
+export const PaddingLessPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--paddingless-page-container-gap);
+  width: 100%;
+  margin-top: var(--paddingless-page-container-gap);
+
+  --paddingless-page-container-gap: 0.5rem;
 `;
