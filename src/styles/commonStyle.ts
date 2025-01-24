@@ -163,3 +163,10 @@ export const PaddingLessPageContainer = styled.div`
 
   --paddingless-page-container-gap: 0.5rem;
 `;
+
+export const InputComponentsDescription = styled.p`
+  position: relative;
+  margin: 0;
+  font-size: var(--font-size-small);
+  font-weight: normal;
+`;

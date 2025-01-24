@@ -2,14 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
 
-import AuctionEndDate from '../components/inputComponents/AuctionEndDate';
-import BidStepInput from '../components/inputComponents/BidStepInput';
+import DateInput from '../components/inputComponents/DateInput';
 import PhotoInput, {
   PhotoInputRefProps,
 } from '../components/inputComponents/PhotoInput';
-import ProductDetailInput from '../components/inputComponents/ProductDetailInput';
-import ProductNameInput from '../components/inputComponents/ProductNameInput';
-import StartPriceInput from '../components/inputComponents/StartPriceInput';
+import TextAraInput from '../components/inputComponents/TextAreaInput';
+import TextInput from '../components/inputComponents/TextInput';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import { useToastActions } from '../context/toastStore';
 import {
@@ -70,6 +68,10 @@ const ItemRegisterPage = () => {
         formData.append(`subImage${index}`, file);
       });
     }
+    //값 콘솔출력
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
   };
 
   //유효성 검사 실패 시 토스트 메시지 출력
@@ -84,11 +86,71 @@ const ItemRegisterPage = () => {
   return (
     <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit, onSubmitError)}>
-        <ProductNameInput register={register} fieldName="productName" />
-        <ProductDetailInput register={register} fieldName="productDetail" />
-        <StartPriceInput register={register} fieldName="startPrice" />
-        <BidStepInput register={register} fieldName="bidStep" />
-        <AuctionEndDate register={register} fieldName="auctionEndDate" />
+        <TextInput
+          fieldName="productName"
+          inputTitle="상품이름"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '상품이름을 입력해주세요' },
+          }}
+        />
+        <TextAraInput
+          fieldName="productDetail"
+          inputTitle="상품설명"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '상품설명을 입력해주세요' },
+          }}
+        />
+        <TextInput
+          fieldName="startPrice"
+          inputTitle="판매 시작 가격"
+          inputType="number"
+          placeholder="예) 1000원"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '판매 시작 가격을 입력해주세요' },
+          }}
+        />
+        <TextInput
+          fieldName="bidStep"
+          inputTitle="입찰 가격 조정 단위"
+          inputType="number"
+          inputDescription="경매 참여시 증가될 가격을 입력해주세요"
+          placeholder="예) 1000원"
+          register={register}
+          RegisterOptions={{
+            required: {
+              value: true,
+              message: '입찰 가격 조정 단위를 입력해주세요',
+            },
+          }}
+        />
+        <DateInput
+          inputTitle="경매 종료 시간"
+          fieldName="auctionEndDate"
+          register={register}
+          RegisterOptions={{
+            required: {
+              value: true,
+              message: '경매 종료 시간을 입력해주세요',
+            },
+            validate: {
+              withinOneYear: (value) => {
+                if (!(typeof value === 'string' || typeof value === 'number'))
+                  return;
+                const selectedDate = new Date(value);
+                const currentDate = new Date();
+                const oneYearLater = new Date();
+                oneYearLater.setFullYear(currentDate.getFullYear() + 1);
+                return (
+                  selectedDate <= oneYearLater ||
+                  '경매 종료 시간은 1년 이내여야 합니다.'
+                );
+              },
+            },
+          }}
+        ></DateInput>
         <PhotoInput
           ref={mainImageRef}
           labelTitle="상품 대표 이미지 등록"
