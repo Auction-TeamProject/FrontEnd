@@ -89,7 +89,7 @@ const PhotoInputButton = styled.button`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--paddingless-page-container-gap);
+  gap: 0.5rem;
   width: 100%;
 `;
 
