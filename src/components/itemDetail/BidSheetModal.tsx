@@ -183,7 +183,7 @@ const EndDate = styled.p`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: var(--item-detail-page-gap);
+  gap: var(--paddingless-page-container-gap);
   width: 100%;
   padding: 1rem;
 `;

@@ -60,18 +60,18 @@ const TextContainer = styled.p`
   align-items: flex-start;
   justify-content: start;
   min-height: 100px;
-  margin: var(--item-detail-page-gap) 0;
+  margin: var(--paddingless-page-container-gap) 0;
 `;
 
 const PhotoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: var(--item-detail-page-gap);
+  gap: var(--paddingless-page-container-gap);
   align-items: center;
   justify-content: start;
   width: 100%;
   min-height: 100px;
-  padding: var(--item-detail-page-gap);
+  padding: var(--paddingless-page-container-gap);
   overflow-x: auto;
 `;
 
@@ -80,7 +80,7 @@ const ViewerContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin: var(--item-detail-page-gap) 0;
+  margin: var(--paddingless-page-container-gap) 0;
   font-size: 0.9rem;
   color: var(--muted-text-color);
 `;
@@ -91,5 +91,5 @@ const ViewerIcon = styled(LuEye)`
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  margin: 0 var(--item-detail-page-gap);
+  margin: 0 var(--paddingless-page-container-gap);
 `;
