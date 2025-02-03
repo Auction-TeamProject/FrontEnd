@@ -11,6 +11,7 @@ type PopupModalProps = {
 const PopupModal = ({ children, onClose, ...props }: PopupModalProps) => {
   return (
     <PopupModalContainer {...props}>
+      <ClosedButton onClick={onClose}>X</ClosedButton>
       <ModalMessageContainer>{children}</ModalMessageContainer>
       <ModalButtonContainer>
         <BarButton onClick={onClose}>확인</BarButton>
@@ -49,4 +50,13 @@ const ModalButtonContainer = styled.div`
   justify-content: center;
   width: 100%;
   padding: 1rem;
+`;
+
+const ClosedButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  padding: 1rem;
+  font-weight: bold;
 `;
