@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
+import TextInput from '../components/inputComponents/TextInput';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import { useToastActions } from '../context/toastStore';
 import {
   BarButton,
   FormContainer,
-  StyledInput,
-  StyledLabel,
+  PaddingPageContainer,
 } from '../styles/commonStyle';
 
 type RecoveryIdFormType = {
@@ -47,45 +46,29 @@ const RecoveryPasswordPage = () => {
   };
 
   return (
-    <RecoveryPasswordPageContainer>
+    <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onsubmit, onSubmitError)}>
-        <StyledLabel htmlFor="loginId">
-          아이디
-          <StyledInput
-            {...register('loginId', {
-              required: { value: true, message: '아이디를 입력해주세요' },
-            })}
-            id="loginId"
-            placeholder="아이디를 입력해주세요"
-          ></StyledInput>
-        </StyledLabel>
-
-        <StyledLabel htmlFor="email">
-          이메일
-          <StyledInput
-            {...register('email', {
-              required: { value: true, message: '이메일을 입력해주세요' },
-            })}
-            id="email"
-            placeholder="이메일을 입력해주세요"
-          ></StyledInput>
-        </StyledLabel>
-
+        <TextInput
+          fieldName="loginId"
+          inputTitle="아이디"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '아이디를 입력해주세요' },
+          }}
+        />
+        <TextInput
+          fieldName="email"
+          inputTitle="이메일"
+          placeholder="example@mail.com"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '이메일을 입력해주세요' },
+          }}
+        />
         <BarButton type="submit">완료</BarButton>
       </FormContainer>
-    </RecoveryPasswordPageContainer>
+    </PaddingPageContainer>
   );
 };
 
 export default RecoveryPasswordPage;
-
-const RecoveryPasswordPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  padding: 10%;
-  background-color: white;
-`;

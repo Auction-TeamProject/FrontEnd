@@ -71,4 +71,4 @@
      - 예: 색상, 폰트 크기 등
    - **특정 컴포넌트에 종속되는 변수는 해당 컴포넌트에 정의하며 컴포넌트 이름을 병기한다.**
      - 특정 컴포넌트에서만 사용되는 CSS 변수는 해당 컴포넌트 파일 내에 정의하고, 변수명에 컴포넌트 이름을 포함시켜 명확히 한다.
-     - 예: `--item-detail-page-gap`, `--header-bar-height`
+     - 예: `--paddingless-page-container-gap`, `--header-bar-height`

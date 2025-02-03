@@ -1,12 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Fragment, useState } from 'react';
+import { FaPen } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DropdownType } from '../components/DropDown';
 import FilterDropDown from '../components/FilterDropDown';
 import ItemList from '../components/ItemList';
 import SearchBar from '../components/SearchBar';
+import { BarButton } from '../styles/commonStyle';
 
 type Item = {
   id: number;
@@ -51,6 +54,7 @@ const orderQueryArray: { [key in Order]: string } = {
 const HomePage = () => {
   const [order, setOrder] = useState<Order>(Order.REGISTERED_DATE);
   const [SearchInputValue, setSearchInputValue] = useState<string>();
+  const navigate = useNavigate();
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ['items', SearchInputValue, order],
@@ -118,6 +122,16 @@ const HomePage = () => {
           />
         ))}
       </ItemListContainer>
+      <StickyButtonContainer>
+        <BarButton
+          onClick={() => {
+            navigate('/auction/register');
+          }}
+        >
+          <FaPen />
+          판매하기
+        </BarButton>
+      </StickyButtonContainer>
     </HomePageContainer>
   );
 };
@@ -166,5 +180,13 @@ const ItemListContainer = styled.section`
   gap: 1rem;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 1rem;
+`;
+
+const StickyButtonContainer = styled.div`
+  position: sticky;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 1rem;
+  margin-top: -4rem;
+  margin-right: 0;
 `;

@@ -59,8 +59,8 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 0 var(--item-detail-page-gap);
-  margin: 0 var(--item-detail-page-gap);
+  padding: 0 var(--paddingless-page-container-gap);
+  margin: 0 var(--paddingless-page-container-gap);
   overflow: hidden;
   background-color: var(--background-color);
   border-radius: 1rem;

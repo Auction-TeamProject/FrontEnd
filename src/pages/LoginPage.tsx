@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import brandImg from '../assets/react.svg';
@@ -10,9 +9,6 @@ const LoginPage = () => {
       <LoginSection>
         <AppLogo src={brandImg} />
         <LoginForm />
-        <RegisterContainer>
-          아직 회원이 아니신가요?<Link to="/register">회원가입</Link>
-        </RegisterContainer>
       </LoginSection>
       <SocialLoginSection>
         <SocialLoginDivider>
@@ -54,7 +50,7 @@ const LoginPage = () => {
 
 export default LoginPage;
 
-const LoginPageContainer = styled.div`
+const LoginPageContainer = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -87,20 +83,9 @@ const SocialLoginSection = styled.section`
 `;
 
 const AppLogo = styled.img`
+  position: relative;
   width: 100%;
-  height: 100px;
-  margin: 3rem 0;
-`;
-
-const RegisterContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 1rem 0;
-  font-size: var(--font-size-small);
-  color: var(--muted-text-color);
+  padding: 4rem;
 `;
 
 const SocialLoginDivider = styled.div`

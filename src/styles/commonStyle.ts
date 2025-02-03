@@ -11,6 +11,7 @@ export const MarginLessContainer = styled.section<MarginLessContainerProps>`
   flex: ${({ $flex }) => $flex || 0};
   flex-direction: ${({ $direction }) => $direction || 'column'};
   width: 100%;
+  height: 100%;
   padding: var(--marginless-container-padding);
   margin: 0;
   background-color: white;
@@ -35,6 +36,7 @@ export const BarButton = styled.button`
   justify-content: center;
   width: 100%;
   height: 3rem;
+  padding: 1rem;
   font-size: var(--font-size-medium);
   font-weight: bold;
   color: white;
@@ -59,7 +61,7 @@ export const StyledTextArea = styled.textarea`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 7rem;
+  height: 100%;
   padding: 0.5rem;
   font-size: var(--font-size-base);
   resize: none;
@@ -69,6 +71,7 @@ export const StyledTextArea = styled.textarea`
 `;
 
 export const FormContainer = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -97,7 +100,6 @@ export const InputSection = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10%;
 `;
 
 export const StyledLabel = styled.label`
@@ -120,4 +122,51 @@ export const InputContainer = styled.div`
 
 export const FlexibleBarButton = styled(BarButton)`
   flex: 1;
+`;
+
+export const DesciptionContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  list-style: circle;
+  list-style-position: inside;
+  background-color: var(--background-color);
+  border-radius: 10px;
+
+  li {
+    margin: 0.5rem;
+    font-size: var(--font-size-small);
+    color: var(--muted-text-color);
+  }
+`;
+
+export const PaddingPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-page-container-gap);
+  width: 100%;
+  height: 100%;
+  padding: 5% 10%;
+  background-color: white;
+
+  --padding-page-container-gap: 0.5rem;
+`;
+
+export const PaddingLessPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--paddingless-page-container-gap);
+  width: 100%;
+  margin-top: var(--paddingless-page-container-gap);
+
+  --paddingless-page-container-gap: 0.5rem;
+`;
+
+export const InputComponentsDescription = styled.p`
+  position: relative;
+  margin: 0;
+  font-size: var(--font-size-small);
+  font-weight: normal;
 `;

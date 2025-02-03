@@ -10,6 +10,7 @@ import { useUserState } from '../context/userStore';
 import {
   MarginLessContainer,
   MarginLessContainerTitle,
+  PaddingLessPageContainer,
 } from '../styles/commonStyle';
 
 export type BidType = {
@@ -178,7 +179,7 @@ const ItemDetailPage = () => {
   }, [itemId]);
 
   return (
-    <PageContainer>
+    <PaddingLessPageContainer>
       <MarginLessContainer $direction="row">
         <MarginLessContainerTitle>상품명</MarginLessContainerTitle>
         <ItemName>{itemDetails?.itemName}</ItemName>
@@ -194,23 +195,11 @@ const ItemDetailPage = () => {
         endDate={itemDetails?.endDate || new Date()}
         bidIncrement={itemDetails?.bidIncrement || 1000}
       />
-    </PageContainer>
+    </PaddingLessPageContainer>
   );
 };
 
 export default ItemDetailPage;
-
-const PageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--item-detail-page-gap);
-  width: 100%;
-  height: 100%;
-  margin-top: var(--item-detail-page-gap);
-
-  --item-detail-page-gap: 8px;
-`;
 
 const ItemName = styled.p`
   padding: 0;

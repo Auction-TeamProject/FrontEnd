@@ -7,11 +7,14 @@ import HomeHeaderBarLayout from './components/layout/HomeHeaderBarLayout';
 import PopupProvider from './components/Modal/PopupProvider';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
+import AccountDeletePage from './pages/AccountDeletePage';
 import HomePage from './pages/HomePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemEditPage from './pages/ItemEditPage';
 import ItemRegisterPage from './pages/ItemRegisterPage';
 import LoginPage from './pages/LoginPage';
+import Mypage from './pages/Mypage';
+import ProfileEditPage from './pages/ProfileEditPage';
 import RecoveryIdPage from './pages/RecoveryIdPage';
 import RecoveryPasswordPage from './pages/RecoveryPasswordPage';
 import RegisterPage from './pages/RegisterPage';
@@ -55,6 +58,24 @@ const router = createBrowserRouter([
           {
             path: 'password',
             element: <RecoveryPasswordPage />,
+          },
+        ],
+      },
+      {
+        path: 'mypage',
+        element: null,
+        children: [
+          {
+            path: '',
+            element: <Mypage />,
+          },
+          {
+            path: 'edit',
+            element: <ProfileEditPage />,
+          },
+          {
+            path: 'delete',
+            element: <AccountDeletePage />,
           },
         ],
       },

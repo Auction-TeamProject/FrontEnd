@@ -83,7 +83,7 @@ const StyledLi = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: var(--item-detail-page-gap) 0;
+  margin: var(--paddingless-page-container-gap) 0;
   font-weight: bold;
   color: var(--muted-text-color);
 `;
@@ -97,7 +97,7 @@ const Description = styled.p`
 `;
 
 const Bidder = styled.p`
-  margin: 0 var(--item-detail-page-gap);
+  margin: 0 var(--paddingless-page-container-gap);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

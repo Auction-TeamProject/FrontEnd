@@ -50,3 +50,6 @@ yarn-error.log*
 dev-dist/
 .env
 .env.development
+
+# TypeScript build info file
+tsconfig.tsbuildinfo

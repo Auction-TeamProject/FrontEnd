@@ -1,4 +1,10 @@
-import { Dispatch, HTMLAttributes, SetStateAction, useRef } from 'react';
+import {
+  Dispatch,
+  HTMLAttributes,
+  KeyboardEvent,
+  SetStateAction,
+  useRef,
+} from 'react';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 
@@ -9,9 +15,18 @@ type SearchBarProps = {
 const SearchBar = ({ setSearchInputValue, ...props }: SearchBarProps) => {
   const SearchInputRef = useRef<HTMLInputElement>(null);
 
+  const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setSearchInputValue(SearchInputRef.current?.value);
+    }
+  };
+
   return (
     <SearchBarContainer {...props}>
-      <SearchInput ref={SearchInputRef}></SearchInput>
+      <SearchInput
+        ref={SearchInputRef}
+        onKeyDown={handleEnterPress}
+      ></SearchInput>
       <SearchButtonIcon
         onClick={() => setSearchInputValue(SearchInputRef.current?.value)}
       />

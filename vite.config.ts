@@ -16,7 +16,8 @@ export default defineConfig({
         short_name: '앱 짧은 이름',
         description: '앱 설명',
         display: 'standalone',
-        start_url: '/item-detail/1',
+        start_url: '/login',
+        scope: '/',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: [

@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useOutletContext } from 'react-router-dom';
-import styled from 'styled-components';
 
+import TextInput from '../components/inputComponents/TextInput';
 import { DropDownHeaderLayoutContextType } from '../components/layout/DropDownHeaderBarLayout';
 import { useToastActions } from '../context/toastStore';
 import {
   BarButton,
   FormContainer,
-  StyledInput,
-  StyledLabel,
+  PaddingPageContainer,
 } from '../styles/commonStyle';
 
 type RecoveryIdFormType = {
@@ -46,34 +45,22 @@ const RecoveryIdPage = () => {
   };
 
   return (
-    <RecoveryIdPageContainer>
+    <PaddingPageContainer>
       <FormContainer onSubmit={handleSubmit(onsubmit, onSubmitError)}>
-        <StyledLabel htmlFor="email">
-          이메일
-          <StyledInput
-            {...register('email', {
-              required: { value: true, message: '이메일을 입력해주세요' },
-            })}
-            id="email"
-            placeholder="이메일을 입력해주세요"
-          ></StyledInput>
-        </StyledLabel>
+        <TextInput
+          fieldName="email"
+          inputTitle="이메일"
+          placeholder="example@mail.com"
+          register={register}
+          RegisterOptions={{
+            required: { value: true, message: '이메일을 입력해주세요' },
+          }}
+        />
 
         <BarButton type="submit">완료</BarButton>
       </FormContainer>
-    </RecoveryIdPageContainer>
+    </PaddingPageContainer>
   );
 };
 
 export default RecoveryIdPage;
-
-const RecoveryIdPageContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  padding: 10%;
-  background-color: white;
-`;
