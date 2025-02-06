@@ -8,6 +8,7 @@ import PopupProvider from './components/Modal/PopupProvider';
 import { ToastProvider } from './components/Modal/ToastProvider';
 import { useUserActions } from './context/userStore';
 import AccountDeletePage from './pages/AccountDeletePage';
+import EmailVerifyPage from './pages/EmailVerifyPage';
 import HomePage from './pages/HomePage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemEditPage from './pages/ItemEditPage';
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
         children: [
           { path: '', element: <RegisterPage /> },
           { path: 'send-email', element: <SendEmailPage /> },
+          { path: 'email-verify/:code', element: <EmailVerifyPage /> },
         ],
       },
       {
@@ -71,7 +73,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'edit',
-            element: <ProfileEditPage />,
+            element: null,
+            children: [
+              { path: 'nickname', element: <ProfileEditPage /> },
+              { path: 'password', element: <ProfileEditPage /> },
+            ],
           },
           {
             path: 'delete',
